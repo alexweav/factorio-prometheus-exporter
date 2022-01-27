@@ -1,8 +1,24 @@
---[[script.on_event(defines.events.on_player_changed_position,
-    function(event)
-        local player = game.get_player(event.player_index)
-        if player.character and player.get_inventory(defines.inventory.character_armor).get_item_count("fire-armor") >= 1 then
-            player.surface.create_entity{name="fire-flame", position=player.position, force="neutral"} 
-        end
-    end
-)]]
+prometheus = require("lib.prometheus.prometheus")
+
+nth_tick = 5 * 60
+
+script.on_init(function()
+    script.on_nth_tick(nth_tick, scrape_metrics)
+end)
+
+script.on_load(function()
+    script.on_nth_tick(nth_tick, scrape_metrics)
+end)
+
+script.on_nth_tick(nth_tick, scrape_metrics)
+
+gauge_exporter_count = prometheus.gauge("factorio_prometheus_exporter_count", "exporter count")
+
+function scrape_metrics(event)
+    local player = game.get_player(1)
+    count = player.surface.count_entities_filtered{name="prometheus-exporter"}
+    gauge_exporter_count:set(count)
+
+    game.write_file("factorio-prometheus-exporter/test.txt", tostring(count), false)
+    game.write_file("factorio-prometheus-exporter/game.prom", prometheus.collect(), false)
+end
