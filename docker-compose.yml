@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  exporter:
+    image: prom/node-exporter
+    command: --collector.textfile.directory=/textfiles
+    volumes:
+      - ${APPDATA}\Factorio\script-output\factorio-prometheus-exporter:/textfiles # Windows
+      # - ~/Library/Application Support/factorio/script-output/factorio-prometheus-exporter/:/textfiles # macOS
+      # - /opt/factorio/script-output/factorio-prometheus-exporter:/textfiles # Linux
+    ports:
+      - 9100:9100
+
+  grafana-agent:
+    image: grafana/agent:latest
+    volumes:
+      - ./data/agent:/etc/agent/data
+      - ${APPDATA}\Factorio\script-output\factorio-prometheus-exporter:/textfiles
+      - ./agent.yml:/etc/agent/agent.yaml
+    ports:
+      - "12345:12345"

@@ -1,0 +1,18 @@
+server:
+  log_level: debug
+  http_listen_port: 12345
+
+metrics:
+  global:
+    scrape_interval: 10s
+  configs:
+    - name: node-exporter
+      scrape_configs:
+        - job_name: node-exporter
+          static_configs:
+            - targets: ['exporter:9100']
+      remote_write:
+        - url: <Insert your Grafana Cloud Prometheus remote write URL here>
+          basic_auth:
+            username: <Insert your Grafana Cloud username here>
+            password: <Insert your Grafana Cloud API key here>
