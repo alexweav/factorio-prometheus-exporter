@@ -1040,7 +1040,7 @@ function generate_arithmetic_combinator(combinator)
     return combinator
 end
   
-function generate_prometheus_exporter(combinator)
+function generate_decider_combinator(combinator)
     combinator.sprites =
       make_4way_animation_from_spritesheet({ layers =
         {
@@ -1151,7 +1151,7 @@ function generate_prometheus_exporter(combinator)
         }
       }
     }
-    combinator.greater_symbol_sprites =
+    --[[combinator.greater_symbol_sprites =
     {
       north = util.draw_as_glow
         {
@@ -1616,7 +1616,7 @@ function generate_prometheus_exporter(combinator)
             shift = util.by_pixel(0, -13.5)
           }
         }
-    }
+    }]]
     combinator.input_connection_points =
     {
       {
@@ -1722,7 +1722,7 @@ function generate_prometheus_exporter(combinator)
     return combinator
 end
   
-function generate_constant_combinator(combinator)
+function generate_prometheus_exporter(combinator)
     combinator.sprites =
       make_4way_animation_from_spritesheet({ layers =
         {

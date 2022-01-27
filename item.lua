@@ -43,11 +43,11 @@ data:extend{fireArmor,recipe}]]
 
 local entity_prototype = generate_prometheus_exporter
 {
-    type = "decider-combinator",
+    type = "constant-combinator",
     name = "prometheus-exporter",
-    icon = "__base__/graphics/icons/decider-combinator.png",
+    icon = "__factorio-prometheus-exporter__/graphics/icons/prometheus-smol.png",
     icon_size = 64,
-    icon_mipmaps = 4,
+    icon_mipmaps = 1,
     flags = { "placeable-neutral", "player-creation" },
     minable =
     {
@@ -55,11 +55,13 @@ local entity_prototype = generate_prometheus_exporter
         result = "prometheus-exporter"
     },
     max_health = 150,
-    corpse = "decider-combinator-remnants",
-    dying_explosion = "decider-combinator-explosion",
+    corpse = "constant-combinator-remnants",
+    dying_explosion = "constant-combinator-explosion",
     collision_box = {{-0.35, -0.65}, {0.35, 0.65}},
     selection_box = {{-0.5, -1}, {0.5, 1}},
     -- damaged_trigger_effect = hit_effects.entity(),
+
+    item_slot_count = 20,
 
     energy_source =
     {
@@ -124,9 +126,9 @@ local item_prototype =
 {
     type = "item",
     name = "prometheus-exporter",
-    icon = "__base__/graphics/icons/decider-combinator.png",
+    icon = "__factorio-prometheus-exporter__/graphics/icons/prometheus-smol.png",
     icon_size = 64,
-    icon_mipmaps = 4,
+    icon_mipmaps = 1,
     subgroup = "circuit-network",
     place_result="prometheus-exporter",
     order = "c[combinators]-b[prometheus-exporter]",
