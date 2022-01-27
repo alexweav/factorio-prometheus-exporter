@@ -1,2 +1,2 @@
-# factorio-prometheus-exporter
-export prometheus metrics from factorio
+# Factorio Prometheus Exporter
+A Factorio mod for exporting circuit network data to Prometheus.
